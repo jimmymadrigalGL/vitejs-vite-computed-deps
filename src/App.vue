@@ -17,24 +17,18 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useMemoize } from '@vueuse/core';
+
 const count1 = ref(0);
 const count2 = ref(0);
 const count3 = ref(0);
 let count4 = 0;
-
-const calc = computed(() => {
-  console.log(
-    'calculated!',
-    count1.value + count2.value,
-    '=',
-    count1.value,
-    '+',
-    count2.value,
-    '+',
-    count4
-  );
-  return count1.value + count2.value + count4;
+const memoCalc = useMemoize((a, b, c, d) => {
+  console.log('calculated!', a + b + c, '=', a, '+', b, '+', c);
+  return a + b + c;
 });
+
+const calc = computed(() => memoCalc(count1.value, count2.value, count4));
 
 const reset = () => {
   count1.value = 0;
