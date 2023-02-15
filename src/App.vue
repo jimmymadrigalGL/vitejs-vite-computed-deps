@@ -12,6 +12,7 @@
   </div>
   <br />
   <div>Calculated: count 1 + count2 + count4 = {{ calc }}</div>
+  <button @click="reset">Reest</button>
 </template>
 
 <script setup>
@@ -34,4 +35,11 @@ const calc = computed(() => {
   );
   return count1.value + count2.value + count4;
 });
+
+const reset = () => {
+  count1.value = 0;
+  count2.value = 0;
+  count3.value = 0;
+  count4 = 0;
+};
 </script>
